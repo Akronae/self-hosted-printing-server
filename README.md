@@ -6,7 +6,14 @@
 
 ## Running
 
+```bash
+git clone https://github.com/Akronae/self-hosted-printing-server
+cd self-hosted-printing-server
+touch docker-compose.yaml
+```
+
 ```yaml
+# docker-compose.yaml
 services:
   api:
     build:

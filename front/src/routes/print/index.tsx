@@ -15,6 +15,7 @@ import {
   Stack,
   Text,
   Tooltip,
+  useMatches,
 } from "@mantine/core";
 import { Dropzone } from "@mantine/dropzone";
 import { useTimeout } from "@mantine/hooks";
@@ -33,17 +34,33 @@ function Print() {
   useAuthGuard();
 
   const user = useUserMe();
+  const direction = useMatches({
+    base: "column-reverse" as const,
+    md: "row" as const,
+  });
   return (
     <Stack flex={1}>
       {!user.me.data?.data.isVerified && <WaitingForReview />}
       {user.me.data?.data.isVerified && (
-        <Group h={"100%"}>
-          <Stack h={"100%"}>
+        <div
+          style={{
+            height: "100%",
+            display: "flex",
+            flexDirection: direction,
+            alignContent: "center",
+            alignItems: "center",
+            gap: 20,
+          }}
+        >
+          <Stack
+            h={{ base: "65%", md: "100%" }}
+            maw={{ base: "100%", md: 300 }}
+          >
             {user.me.data?.data.isAdmin && <Users />}
             <History />
           </Stack>
           <PrintPage />
-        </Group>
+        </div>
       )}
     </Stack>
   );
@@ -102,10 +119,20 @@ function PrintPage() {
         </Dropzone.Idle>
 
         <div>
-          <Text fz="h1" fw={"bold"}>
+          <Text
+            fz={{ base: "h2", md: "h1" }}
+            ta={{ base: "center", md: "revert" }}
+            fw={"bold"}
+          >
             Drag a file or click to print
           </Text>
-          <Text size="sm" c="dimmed" inline mt={7}>
+          <Text
+            size="sm"
+            c="dimmed"
+            ta={{ base: "center", md: "revert" }}
+            inline
+            mt={7}
+          >
             Accepted: PDF, PNG and JPEG
           </Text>
         </div>
@@ -124,7 +151,7 @@ function Users() {
   if (!pending.length) return null;
 
   return (
-    <Card maw={300}>
+    <Card>
       <Text fw={"bold"} mb={"md"}>
         Pending user registrations
       </Text>
@@ -179,7 +206,7 @@ function History() {
   });
 
   return (
-    <Card w={300} flex={1}>
+    <Card flex={1}>
       <Text fw={"bold"} mb={"md"}>
         History
       </Text>
