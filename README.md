@@ -2,6 +2,8 @@
 
 > Are you tired of your relatives asking you to print something for them? Well, now they can do it themselves! Even if they are not on your local network.
 
+![image](https://github.com/user-attachments/assets/e91a0fb0-2502-4dda-803c-2a579004a242)
+
 ## Running
 
 ```yaml
